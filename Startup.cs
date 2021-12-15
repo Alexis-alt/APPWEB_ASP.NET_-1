@@ -5,9 +5,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using WebApplication1.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1
 {
@@ -23,7 +25,19 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+
+            //Configuración de la cadena de conexión
+            services.AddDbContext<ApplicationDBContext>(options => options.
+            UseSqlServer(Configuration.GetConnectionString("ConnectionPruebas")));
+
             services.AddControllersWithViews();
+
+            
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +60,7 @@ namespace WebApplication1
 
             app.UseAuthorization();
 
+            //Este middleware indica el endpoint necesario para renderizar las vistas de razor que es el home controller
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

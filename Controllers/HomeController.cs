@@ -18,11 +18,13 @@ namespace WebApplication1.Controllers
             _logger = logger;
         }
 
+        //Renderiza vista principal o home
         public IActionResult Index()
         {
             return View();
         }
 
+        //Renderiza pagina o componente de privacy
         public IActionResult Privacy()
         {
             return View();
