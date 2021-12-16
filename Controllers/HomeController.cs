@@ -6,22 +6,31 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Models;
+using WebApplication1.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        //Al importar "using Microsoft.EntityFrameworkCore;" podemos usar tambien métodos async
+
+        public readonly ApplicationDBContext _contextDB;
+
+        public HomeController(ApplicationDBContext contextDB)
         {
-            _logger = logger;
+
+            _contextDB = contextDB;
+
+           
         }
 
         //Renderiza vista principal o home
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _contextDB.Usuario.ToListAsync());
         }
 
         //Renderiza pagina o componente de privacy
