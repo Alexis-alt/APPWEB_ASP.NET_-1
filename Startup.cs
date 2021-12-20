@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+ï»¿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -28,11 +28,14 @@ namespace WebApplication1
 
 
 
-            //Configuración de la cadena de conexión
+            //Configuraciï¿½n de la cadena de conexiï¿½n
             services.AddDbContext<ApplicationDBContext>(options => options.
             UseSqlServer(Configuration.GetConnectionString("ConnectionPruebas")));
 
             services.AddControllersWithViews();
+
+            services.AddDbContext<WebApplication1Context>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("WebApplication1Context")));
 
             
 
